@@ -1,0 +1,39 @@
+{
+  "name": "pokebattles",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "vitest run",
+    "data": "tsx scripts/build-data.mts",
+    "day": "tsx scripts/print-day.mts",
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "play": "tsx scripts/play.mts",
+    "deploy": "tsc && vite build --outDir deploy --emptyOutDir",
+    "build:function": "esbuild src/engine/server.ts --bundle --format=esm --platform=neutral --outfile=supabase/functions/submit/engine.js && cp supabase/functions/submit/engine.js supabase/functions/entry/engine.js && mkdir -p supabase/functions/match && cp supabase/functions/submit/engine.js supabase/functions/match/engine.js && esbuild src/engine/badgeRules.ts --bundle --format=esm --platform=neutral --outfile=supabase/functions/flags/rules.js",
+    "deploy:dev": "tsc && VITE_DEV_BUILD=1 vite build --outDir deploy-dev --emptyOutDir",
+    "stress": "tsx scripts/pvp-stress.mts",
+    "balance": "tsx scripts/balance.mts",
+    "build:move": "node scripts/move/build.mjs"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "devDependencies": {
+    "@pkmn/data": "^0.10.11",
+    "@pkmn/dex": "^0.10.11",
+    "@smogon/calc": "^0.12.0",
+    "@types/node": "^26.6.5",
+    "supabase": "^2.120.0",
+    "tsx": "^4.23.15",
+    "typescript": "^7.0.2",
+    "vite": "^8.3.4",
+    "vitest": "^5.0.4"
+  },
+  "dependencies": {
+    "gifuct-js": "^2.1.2",
+    "qrcode-generator": "^1.4.4"
+  }
+}

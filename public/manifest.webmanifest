@@ -1,0 +1,25 @@
+{
+  "name": "DailyBattles",
+  "short_name": "DailyBattles",
+  "description": "A new Gen 1 Pok\u00e9mon battle every day. Beat Red!",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#15161f",
+  "theme_color": "#2b2d42",
+  "icons": [
+    {
+      "src": "icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "id": "pokebattles"
+}

@@ -1,0 +1,40 @@
+<!doctype html>
+<!-- Source for public/icons/invite-og.png/.jpg (preview for invite links). Capture at 1200×630, then make a JPG:
+     Chrome --headless --window-size=1200,630 --screenshot=public/icons/invite-og.png http://localhost:5199/scripts/og-invite.html
+     sips -s format jpeg -s formatOptions 82 public/icons/invite-og.png --out public/icons/invite-og.jpg -->
+<html><head><meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&family=Plus+Jakarta+Sans:wght@700;800&display=block" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin: 0; width: 1200px; height: 630px; overflow: hidden; }
+  body { background: #f4f4f6; font-family: "Nunito", sans-serif; color: #111114; display: flex; align-items: center; padding: 0 64px; gap: 30px; }
+  .text { flex: 1; display: grid; gap: 20px; }
+  .brand { font-family: "Plus Jakarta Sans", sans-serif; font-weight: 800; font-size: 40px; letter-spacing: -0.03em; }
+  .brand b { color: #e3262e; }
+  h1 { margin: 0; font-family: "Plus Jakarta Sans", sans-serif; font-weight: 800; font-size: 78px; letter-spacing: -0.05em; line-height: 0.98; }
+  h1 span { color: #e3262e; }
+  p { margin: 0; font-size: 29px; font-weight: 800; color: #55555f; }
+  .card {
+    position: relative; width: 520px; height: 470px; border-radius: 40px; flex: none; overflow: hidden;
+    background: linear-gradient(180deg, #ef3e3a 0%, #e3262e 49%, #111114 49%, #111114 53%, #fff 53%);
+    box-shadow: 0 40px 70px -30px rgba(17, 17, 20, 0.45);
+  }
+  .vs { position: absolute; left: 50%; top: 51%; transform: translate(-50%, -50%); width: 130px; height: 130px; border-radius: 50%;
+    background: #fff; border: 14px solid #111114; display: grid; place-items: center; z-index: 2;
+    font-family: "Plus Jakarta Sans", sans-serif; font-weight: 800; font-size: 50px; color: #e3262e; }
+  .mon { position: absolute; bottom: 34px; image-rendering: pixelated; filter: drop-shadow(0 10px 8px rgba(0,0,0,0.2)); z-index: 1; }
+  .left { left: -6px; height: 262px; transform: scaleX(-1); }
+  .right { right: 22px; height: 178px; }
+</style></head>
+<body>
+  <div class="text">
+    <div class="brand"><b>DAILY</b>BATTLES</div>
+    <h1>A friend <span>challenged</span> you to a battle!</h1>
+    <p>Pick your team. Battle head to head.</p>
+  </div>
+  <div class="card">
+    <img class="mon left" src="/sprites/ani/charizard.gif" alt="">
+    <div class="vs">VS</div>
+    <img class="mon right" src="/sprites/ani/blastoise.gif" alt="">
+  </div>
+</body></html>

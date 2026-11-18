@@ -1,0 +1,46 @@
+<!doctype html>
+<!-- Source for public/icons/og.png (the link-preview image). Capture at 1200×630:
+     Chrome --headless --window-size=1200,630 --screenshot=public/icons/og.png http://localhost:5199/scripts/og.html -->
+<html><head><meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&family=Plus+Jakarta+Sans:wght@700;800&display=block" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin: 0; width: 1200px; height: 630px; overflow: hidden; }
+  body { background: #f4f4f6; font-family: "Nunito", sans-serif; color: #111114; display: flex; align-items: center; padding: 0 70px; gap: 40px; }
+  .text { flex: 1; display: grid; gap: 22px; }
+  .brand { font-family: "Plus Jakarta Sans", sans-serif; font-weight: 800; font-size: 46px; letter-spacing: -0.03em; }
+  .brand b { color: #e3262e; }
+  h1 { margin: 0; font-family: "Plus Jakarta Sans", sans-serif; font-weight: 800; font-size: 92px; letter-spacing: -0.05em; line-height: 0.95; }
+  h1 span { color: #e3262e; }
+  p { margin: 0; font-size: 30px; font-weight: 800; color: #55555f; }
+  .facts { display: flex; gap: 26px; margin-top: 6px; }
+  .facts div { display: flex; align-items: center; gap: 12px; font-size: 19px; font-weight: 800; color: #55555f; line-height: 1.2; }
+  .facts b { font-family: "Plus Jakarta Sans", sans-serif; font-size: 52px; color: #111114; }
+  .ball {
+    position: relative; width: 470px; height: 470px; border-radius: 50%; flex: none;
+    background: linear-gradient(180deg, #ef3e3a 0%, #e3262e 48%, #111114 48%, #111114 52.5%, #fff 52.5%);
+    border: 12px solid #111114; box-shadow: 0 40px 70px -30px rgba(17, 17, 20, 0.45); overflow: hidden;
+  }
+  .ball::after { content: ""; position: absolute; left: 50%; top: 50%; width: 120px; height: 120px; transform: translate(-50%, -50%); border-radius: 50%; background: #fff; border: 12px solid #111114; z-index: 0; }
+  .mon { position: absolute; z-index: 1; image-rendering: auto; filter: drop-shadow(0 10px 10px rgba(0, 0, 0, 0.25)); }
+  .ball::after { display: none; }
+  .zard { width: 300px; left: 30px; top: 70px; }
+  .pika { width: 118px; right: 64px; top: 286px; }
+  .red { height: 190px; right: 58px; top: 34px; }
+</style></head>
+<body>
+  <div class="text">
+    <div class="brand"><b>DAILY</b>BATTLES</div>
+    <h1>Can you beat <span>Red</span>?</h1>
+    <p>A new Pokémon battle every day.</p>
+    <div class="facts">
+      <div><b>6</b>Red’s legendary<br>team, all Lv 100</div>
+      <div><b>3</b>Difficulties<br>to beat</div>
+    </div>
+  </div>
+  <div class="ball">
+    <img class="mon zard" src="/sprites/ani/charizard.gif" alt="">
+    <img class="mon red" src="/sprites/trainers/red-hd.png" alt="">
+    <img class="mon pika" src="/sprites/ani/pikachu.gif" alt="">
+  </div>
+</body></html>

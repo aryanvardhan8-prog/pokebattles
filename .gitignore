@@ -1,0 +1,16 @@
+node_modules
+deploy
+.claude
+supabase/.temp
+deploy-dev
+
+# keep private stuff off GitHub
+.env
+.env.*
+brag-output/
+CLAUDE.md
+.claude/
+deploy/
+deploy-dev/
+.DS_Store
+supabase/.temp

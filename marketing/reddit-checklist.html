@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Reddit Posting Checklist</title>
+<style>
+  :root { --bg: #f4f4f6; --card: #fff; --ink: #14141a; --muted: #6a6a78; --line: #e4e4ea; --red: #e3262e; --ok: #1f8a4c; }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --bg: #121216; --card: #1c1c22; --ink: #f1f1f4; --muted: #a0a0ad; --line: #2c2c35; } }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font: 15px/1.5 system-ui, -apple-system, "Segoe UI", sans-serif; }
+  main { max-width: 760px; margin: 0 auto; padding: 24px 16px 60px; }
+  h1 { font-size: 26px; margin: 0 0 4px; letter-spacing: -0.02em; }
+  h1 b { color: var(--red); }
+  .lead { color: var(--muted); margin: 0 0 18px; }
+  .steps { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 14px 18px; margin-bottom: 22px; }
+  .steps ol { margin: 6px 0 0; padding-left: 20px; }
+  .day { font-size: 12px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: var(--red); margin: 26px 0 8px; }
+  .post { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 16px 18px; margin-bottom: 12px; }
+  .post.done { opacity: .55; }
+  .head { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+  .head a { font-weight: 800; font-size: 17px; color: var(--ink); }
+  .tag { font-size: 12px; color: var(--muted); }
+  .done-box { margin-left: auto; display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 700; cursor: pointer; }
+  .note { font-size: 13px; color: var(--muted); margin: 6px 0 10px; }
+  .field { margin-top: 10px; }
+  .label { display: flex; justify-content: space-between; align-items: center; font-size: 12px; font-weight: 800; color: var(--muted); text-transform: uppercase; letter-spacing: .05em; margin-bottom: 4px; }
+  pre { margin: 0; white-space: pre-wrap; word-wrap: break-word; font: inherit; background: var(--bg); border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px; }
+  button.copy { font: inherit; font-size: 12px; font-weight: 800; border: 0; border-radius: 8px; padding: 5px 10px; background: var(--ink); color: var(--bg); cursor: pointer; }
+  button.copy.ok { background: var(--ok); color: #fff; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Reddit posts for <b>Daily</b>Battles</h1>
+  <p class="lead">Two posts a day, in this order. Tick each one off when it's posted (ticks are saved in this browser).</p>
+
+  <div class="steps"><b>For every post:</b>
+    <ol>
+      <li>Open the subreddit → <b>About</b> / Community info → read the <b>Rules</b>. If self-promotion isn't allowed, skip it.</li>
+      <li><b>Create post</b> → <b>Text</b>. Tap <b>Copy</b> for the title and the text below and paste them in.</li>
+      <li>Add a short screen recording or a screenshot if you can, and pick a flair if asked (Fan Game / OC / Discussion).</li>
+      <li>Stay for the first hour and reply to every comment.</li>
+    </ol>
+  </div>
+
+  <div id="list"></div>
+</main>
+
+<script>
+const BODY_MAIN = `Hey! I've been working on a little fan project for the past few weeks and it's finally live: DailyBattles, a free Pokémon battle game you can play in your browser.
+
+🏔️ Every day there's a new battle against Red and his legendary Mt. Silver team (Pikachu, Lapras, Snorlax, Venusaur, Charizard, Blastoise), all Lv 100. One try a day, the same for everyone, with a daily leaderboard. Fair warning: Hard is brutal 😅
+
+🆚 You can also challenge your friends to live battles with fully customisable rules. You both pick your teams at the same time, then battle it out turn by turn.
+
+It uses real Gen 1 battle mechanics, and it's free, no ads, no download, and works on your phone: dailybattles.netlify.app
+
+I built it myself, so I'd genuinely love any feedback: bugs, ideas, things you'd change. There's a feedback box in the game too. Can you beat Red on Hard? 👀`;
+
+const BODY_WEB = `One Pokémon battle a day against Red's legendary Lv 100 team, the same for everyone, with a daily leaderboard and a share card for your result. You can also challenge your friends to live battles with fully customisable rules.
+
+Free, browser only, works on phone: dailybattles.netlify.app
+
+It's a solo project, so I'd love any feedback!`;
+
+const BODY_RBY = `Hey RBY folks! I built a free browser game with Gen 1 battle mechanics and would love people who know RBY to try to break it.
+
+🆚 Live PvP: challenge anyone by link, both pick teams at the same time, fully customisable rules (levels, clauses, items, TMs, turn timer).
+🏔️ Daily: a new battle every day against Red's Mt. Silver team at Lv 100 with perfect DVs, a smart AI and Full Restores.
+
+Damage formula, crits ignoring stat boosts, freeze, sleep, partial trapping and the Hyper Beam KO rule all follow RBY. Tell me what's wrong!
+
+dailybattles.netlify.app`;
+
+const POSTS = [
+  {day: 1, sub: 'pokemongames', title: 'I made a free browser game: battle Red\'s Mt. Silver team every day, or challenge your friends to live battles', body: BODY_MAIN},
+  {day: 1, sub: 'WebGames', title: 'DailyBattles: Wordle meets Pokémon. One battle a day vs the toughest trainer, plus live battles against your friends', body: BODY_WEB},
+  {day: 2, sub: 'PokemonRBY', title: 'I made a free game with Gen 1 battles: fight Red\'s Mt. Silver team daily, or battle your friends live', body: BODY_MAIN},
+  {day: 2, sub: 'playmygame', title: 'DailyBattles: a daily Pokémon battle vs Red, plus live battles with friends (free, browser)', body: BODY_WEB},
+  {day: 3, sub: 'stunfisk', title: 'Made a free RBY battle site: live PvP with clauses, plus a daily fight vs Red\'s Lv 100 team. Looking for RBY players to break it', body: BODY_RBY},
+  {day: 3, sub: 'IndieGaming', title: 'I built a Wordle-style daily Pokémon battle game, plus live battles with friends. Would love feedback', body: BODY_WEB},
+  {day: 4, sub: 'SideProject', title: 'I built DailyBattles: a daily Pokémon battle vs Red, plus live PvP with friends. Feedback welcome', body: BODY_WEB},
+  {day: 5, sub: 'pokemon', title: 'I made a free fan game: battle Red\'s Mt. Silver team every day, or challenge your friends to live battles', body: BODY_MAIN,
+    note: 'Biggest and strictest: check the rules carefully. Fan projects are often only allowed on certain days or with a specific flair.'},
+];
+
+const esc = s => s.replace(/[&<>]/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;'}[c]));
+const doneKey = 'db-reddit-done';
+let done = {};
+try { done = JSON.parse(localStorage.getItem(doneKey) || '{}'); } catch (e) { done = {}; }
+
+const list = document.getElementById('list');
+let lastDay = 0;
+POSTS.forEach((p, i) => {
+  if (p.day !== lastDay) { lastDay = p.day; list.insertAdjacentHTML('beforeend', `<div class="day">Day ${p.day}</div>`); }
+  list.insertAdjacentHTML('beforeend', `
+    <section class="post ${done[p.sub] ? 'done' : ''}" id="p${i}">
+      <div class="head">
+        <a href="https://www.reddit.com/r/${p.sub}/" target="_blank" rel="noopener">r/${p.sub}</a>
+        <span class="tag"><a href="https://www.reddit.com/r/${p.sub}/about/rules" target="_blank" rel="noopener">rules</a></span>
+        <label class="done-box"><input type="checkbox" data-sub="${p.sub}" ${done[p.sub] ? 'checked' : ''}> Posted</label>
+      </div>
+      ${p.note ? `<p class="note">⚠️ ${esc(p.note)}</p>` : ''}
+      <div class="field"><div class="label">Title <button class="copy" data-copy="t${i}">Copy</button></div><pre id="t${i}">${esc(p.title)}</pre></div>
+      <div class="field"><div class="label">Text <button class="copy" data-copy="b${i}">Copy</button></div><pre id="b${i}">${esc(p.body)}</pre></div>
+    </section>`);
+});
+
+document.addEventListener('click', async e => {
+  const b = e.target.closest('button.copy');
+  if (!b) return;
+  const text = document.getElementById(b.dataset.copy).textContent;
+  try { await navigator.clipboard.writeText(text); } catch (err) {
+    const r = document.createRange(); r.selectNodeContents(document.getElementById(b.dataset.copy));
+    const s = getSelection(); s.removeAllRanges(); s.addRange(r); document.execCommand('copy');
+  }
+  b.textContent = 'Copied!'; b.classList.add('ok');
+  setTimeout(() => { b.textContent = 'Copy'; b.classList.remove('ok'); }, 1500);
+});
+document.addEventListener('change', e => {
+  const c = e.target.closest('input[data-sub]');
+  if (!c) return;
+  done[c.dataset.sub] = c.checked;
+  try { localStorage.setItem(doneKey, JSON.stringify(done)); } catch (err) {}
+  c.closest('.post').classList.toggle('done', c.checked);
+});
+</script>
+</body>
+</html>
